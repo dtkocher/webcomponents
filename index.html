@@ -19,7 +19,7 @@
     root.appendChild(document.importNode(tmpl.content, true));
   };
 
-  CrdsEmbedProto.attributeChangedCallback = function() {
+  CrdsEmbedProto.attributeChangedCallback = function(attrName, oldVal, newVal) {
     console.log("attrname : "+attrname+" :: oldval : "+oldVal+" :: newval : "+newVal);
   };
 
