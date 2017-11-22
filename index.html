@@ -1,15 +1,4 @@
-<template id="message">
-  <style>
-    .msg-wrapper
-    {
-       border:1px solid;
-       padding: 9px;
-    }
-    .msg
-    {
-       color: brown;
-    }
-  </style>
+<template>
   <div class="msg-wrapper">
     <div class="msg">
       This is my Message!!
@@ -18,6 +7,7 @@
 </template>
 
 <script>
+/*
   var customPrototype = Object.create(HTMLElement.prototype, {
     createdCallback: function(){
      var shadow = this.createShadowRoot();
@@ -35,4 +25,22 @@
     }
   });
   var message = document.registerElement('my-message', {prototype: customPrototype});
+  */
+
+   // Grab our template full of slider markup and styles
+  var tmpl =  document.currentScript.ownerDocument.querySelector('template');
+
+  // Create a prototype for a new element that extends HTMLElement
+  var MyMessageProto = Object.create(HTMLElement.prototype);
+
+  // Setup our Shadow DOM and clone the template
+  MyMessageProto.createdCallback = function() {
+    var root = this.createShadowRoot();
+    root.appendChild(document.importNode(tmpl.content, true));
+  };
+
+  // Register our new element
+  var MyMessage = document.registerElement('my-message', {
+    prototype: MyMessageProto
+  });
 </script>
